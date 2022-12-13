@@ -1,0 +1,399 @@
+---
+title: "Taller de Git"
+author: David Mateos - Agresta S. Coop.
+date: 29 de noviembre de 2022
+output: 
+  revealjs::revealjs_presentation:
+    theme: sky
+    center: true
+    smart: false
+    self_contained: false
+    reveal_plugins: ["notes"]
+---
+
+
+# Presentación
+
+## Qué es Git?
+
+- Es un __sistema de control de versiones__ distribuido. 
+- Es un programa de línea de comandos.
+
+<aside class="notes">
+  Se puede usar GUI (Rstudio), pero conviene conocer y quitarse el miedo de usar la terminal.
+  Es el único sitio en que se pueden usar todos los comandos de la forma exacta que queremos que se usen: los botones en Rstudio usan las opciones "más típicas", que puede que no siempre sean las mejores.
+</aside>
+
+## Para qué nos sirve?
+
+![](images/phd_final_name.gif){width=50%}
+
+## Para qué nos sirve?
+
+- Seguimiento de cambios.
+- Olvidarnos del "mándame la última versión".
+- Mantener cómodamente distintas versiones de un proyecto.
+- Aprender la lógica de colaboración en proyectos de SL. 
+
+
+##  Para quién?
+
+- En programación
+- Diseño web
+- En general, para archivos de texto plano:
+    * Documentación,
+    * textos auń sin maquetar,
+    * Markdown/RstText/etc.
+    
+# Qué vamos a ver?
+
+## Programa
+
+1. Trabajo en solitario: en local.
+2. Trabajo en solitario: con repos remotos.
+3. Trabajar en equipo: con repos remotos.
+
+
+# Qué es lo que hace git?
+
+## Un repositorio ("repo") es un directorio
+
+![](images/git_snapshots.png)
+
+## Snapshots de los archivos del directorio
+![](images/git-ramas0.png)
+
+# Primeros pasos 
+
+## Git Bash
+
+En Windows hay varios tipos de shell, lo ideal será usar `Git Bash` que se habrá instalado con Git y tiene esta pinta:
+
+![](images/git-bash.png)
+
+## Git Gui
+
+* Git viene con dos herramientas GUI:
+  - Para hacer commits ([git-gui](https://git-scm.com/docs/git-gui)).
+  - Para navegar ([gitk](https://git-scm.com/docs/gitk)).
+* Otras herramientas [GUI](http://git-scm.com/downloads/guis).
+
+
+## Nos presentamos {#hello-git}
+
+``` bash
+git config --global user.name 'David Mateos'
+git config --global user.email 'dmateos@agresta.org'
+git config --global --list
+```
+
+## Comandos básicos de terminal
+
+* `pwd`: muestra en qué directorio estamos.
+* `cd directorio`: cambia de directorio. 
+* `cd ..`: sube un directorio.
+* `ls`: lista el contenido del directorio actual.
+
+`TAB` para autocompletar.
+
+## Creamos nuestro primer repo
+
+``` bash
+cd carpeta_destino
+git init 
+```
+
+##  Qué hay de nuevo?
+
+![](images/directorio_git.png)
+
+
+
+##  Qué hay de nuevo?
+
+![](images/panel_git_Rstudio.png)
+
+
+# El flujo de trabajo en Git
+
+## Vista general
+
+![](images/git-transport.png)
+
+## Empezamos a hacer seguimiento de nuestros archivos
+
+``` bash
+$ git commit -a -m "commit inicial"
+```
+
+## Cambiamos cosas en el proyecto
+
+* Añadir/borrar lineas de archivos de texto.
+* Añadir archivos.
+* Borrar archivos
+* ...
+
+![](images/git-transport-cambios-wd.png)
+
+
+## Añadir al índice
+``` bash
+$ git add nombre_archivo  # ó
+$ git add .
+```
+
+![](images/Rstudio-add.png)
+
+## Cómo estamos?
+``` bash
+$ git status
+```
+![](images/git-status.png)
+
+## Cómo estamos?
+``` bash
+$ git status
+```
+![](images/panel_git_Rstudio.png)
+
+## "Hacer" commit
+``` bash
+$ git commit -m "texto del commit"
+```
+
+![](images/rstudio-commit.png)
+
+
+## Cómo estamos?
+``` bash
+$ git status
+```
+Seguimos haciendo cambios:
+
+1. Cambios en los archivos
+2. Stage
+3. Commit
+
+## Ver el historial de cambios
+
+![](images/secciones_history_rstudio.png)
+
+## gitignore
+
+Si hay archivos de los que no queremos hacer seguimiento.
+
+![](images/gitignore.png)
+
+
+
+# Ramas
+
+## Ramas
+* Las ramas se crean en local.
+* Permiten tener distintas versiones del código.
+* Se suelen usar varias ramas:
+    + `main`. Siempre, por defecto.
+    + `develop`. 
+    + `feature_x`. Ramas por *features*. 
+    
+## Rama main
+![](images/git-ramas0.png)
+
+## checkout
+```bash
+git branch nombre_rama # crea una rama
+git checkout nombre_rama # se cambia a una rama
+git checkout -b # crea una rama y se cambia a ella
+```
+![](images/git_ramas1.png)
+
+## Commits en la rama
+
+![](images/git-ramas2.png)
+
+## Cambios entre ramas
+```bash
+git checkout rama
+```
+
+## Movernos entre 'snapshots'
+```bash
+git checkout SHA
+git checkout nombre_rama
+```
+
+## Mezcla de ramas
+Estando en la rama de destino:
+```bash
+git merge rama_a_unir
+```
+
+
+# Buenas prácticas 
+## Buenas prácticas - Git
+
+* Hacer commits frecuentemente. 
+* No mezclar en el mismo commit cambios que no tengan que ver entre sí.
+* Poner buenos mensajes de commit.
+
+
+# Repos remotos
+
+## Distintos proveedores de servicios
+
+* [Github](https://github.com/).
+* [Bitbucket](https://bitbucket.org/).
+* [Gitlab](https://about.gitlab.com/).
+* [Gitea](https://gitea.io/en-us/).
+
+## Github
+
+* Crear una cuenta con el plan gratuito.
+* Elegir un buen nombre ;-).
+* Crear un token (settings>Developers>Tokens).
+
+ 
+## Subir un proyecto local
+
+1. Crear el nuevo repo en la app web (https://github.com/).
+
+![](images/github_crear_repo1.png)
+
+## Subir un proyecto local
+
+1. Crear el nuevo repo en la app web (https://github.com/).
+
+![](images/github_crear_repo2.png)
+
+
+## Subir un proyecto local
+
+(Seguir las instrucciones)
+![](images/github_crear_repo3.png)
+
+
+## Subir un proyecto local
+
+Si ya tenemos un proyecto empezado
+
+```bash
+git remote add origin http://github.com/usuario/nombre_repo.git
+git push -u origin main
+```
+
+En general:
+```bash
+git remote add nombre_remoto url_repo_remoto
+git push -u nombre_remoto rama_remota
+```
+
+## Descagar (clonar) repo remoto
+Si aún no hemos empezado el proyecto en local.
+```
+git clone https://github.com/usuario/repositorio.git
+```
+
+
+## Comprobar enlace remoto-local
+Comprobarlo con:  
+` git remote -v `
+![](images/git-remote.png) 
+
+
+
+# Flujos de trabajo típicos
+
+## Una persona proyecto simple
+
+commit - commit - commit - (push) - commit - ...
+
+## Una persona, ramas
+
+* Cambios o pruebas que puede que no se queden
+* Proyecto con versión en funcionamiento y versión desarrollo.
+* Uso con metodologías ágiles.
+* Alguien tiene que revisar el código antes de integrarlo (grupos).
+
+## Una persona, ramas
+* Rama main y rama develop.
+* Ramas por *features*.
+
+## Fork
+
+* Copias el proyecto de otro/a.
+* Copias un proyecto tuyo ya terminado.
+
+## Fork - Aportar a un proyecto de otros/as
+* Como suelen funcionar los proyectos SL.
+* Fork del proyecto - clone en local.
+* Cambios (commit - commmit - push).
+* Pull Request a dueños/as proyecto original.  
+
+## Proyecto de grupo sin ramas
+
+* Dar permisos en github.
+* Clonar repositorio, trabajar de forma normal (organizarse!!)
+ commit - commit - commit - 
+* Antes de subir los cambios hay que bajarlos (pull)
+* puede haber conflictos, los solucionamos en local
+* subimos los cambios ya sin conflicto (push)
+
+```bash
+git push origin main #Envia los cambios al repo remoto
+git pull #Trae cambios del repo remoto
+```
+![](images/rstudio-push-pull.png)
+
+
+## Proyecto de grupo con ramas
+
+* Dar permisos en github.
+* Ramas por *feature*, en local.
+* Puede haber rama `develop` o no.
+* Si hay `develop` --> encargado de hacer merge a master.
+
+# Qué puede pasar al juntar dos ramas?
+
+## "fast foward"
+![](images/merge-fast-foward.png)
+
+## Merge con commit
+![](images/merge-con-commit.png)
+
+## Conflicto
+También puede pasar con una sóla rama
+![](images/pull_conflict_merge.png)
+
+# Explorando github
+
+## Visión general
+* **Perfil**. Nuestro listado de repositorios. Podemos elegir los principales a mostrar.
+* **Settings**. No es necesario hacer nada, pero resulta útil por lo menos añadir el nombre, una imagen.
+Crear token para acceso desde terminal.
+
+
+# Herramientas gestión de proyecto
+
+## Permisos
+* Quién puede hacer cambios a nuestro repo
+
+## Issues
+
+* Etiquetas
+* Asignar responsabilidades
+* Tiempo dedicación
+
+## Releases
+
+* Son como tags
+* archivo descarga
+
+
+
+# Referencias
+
+* [Documentación ofiical](https://git-scm.com/docs).
+* Libro [Pro git](https://git-scm.com/book/en/v2)
+
+
+

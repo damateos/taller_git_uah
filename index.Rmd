@@ -7,8 +7,7 @@ output:
     theme: sky
     center: true
     smart: false
-    self_contained: false
-    reveal_plugins: ["notes"]
+    self_contained: true
 ---
 
 
@@ -250,6 +249,7 @@ git merge rama_a_unir
 
 * Crear una cuenta con el plan gratuito.
 * Elegir un buen nombre ;-).
+* Crear un token (settings>Developers>Tokens).
 
  
 ## Subir un proyecto local
@@ -266,6 +266,13 @@ git merge rama_a_unir
 
 
 ## Subir un proyecto local
+
+(Seguir las instrucciones)
+![](images/github_crear_repo3.png)
+
+
+## Subir un proyecto local
+
 Si ya tenemos un proyecto empezado
 
 ```bash
@@ -361,6 +368,7 @@ También puede pasar con una sóla rama
 ## Visión general
 * **Perfil**. Nuestro listado de repositorios. Podemos elegir los principales a mostrar.
 * **Settings**. No es necesario hacer nada, pero resulta útil por lo menos añadir el nombre, una imagen.
+Crear token para acceso desde terminal.
 
 
 # Herramientas gestión de proyecto
